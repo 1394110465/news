@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>登录界面</title>
+		<link rel="stylesheet" type="text/css" href="./css/index.css"/>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div id="tar-box">
+				<div data-index='0' class="button-color">账号登录</div>
+				<div data-index='1'>扫码登录</div>
+				<div data-index='2'>快速登录</div>
+			</div>
+			<div id="text-box">
+				<div  class="main item">
+					
+					<form action="#" method="POST">
+						<div><input class="inputs" type="text" tabindex="1" id="phone" aria-label="请输入手机号码" placeholder="请输入手机号码" autocapitalize="off"></div>
+						<div><input class="inputs" type="password" tabindex="2" aria-label="登录密码" placeholder="登录密码" autocapitalize="off" id="pass"></div>
+						<div><input type="button" value="登录" id="denglu"></div>
+						<div>
+							<a href="#" class="zc">注册</a>
+						</div>
+					</form>
+				</div>
+				<div class="main">
+					<div id="ma"></div>
+				</div>
+				<div class="main" >
+					<div id="ks">
+						    <video id="video"></video>
+						    <canvas id="canvas"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+		<script type="text/javascript">
+			$('#tar-box div').click(function(){
+				//先清除所有的，在设置自己的
+				$("#tar-box div").removeClass("button-color");
+				$("#text-box .main").removeClass("item");
+				$(this).addClass("button-color");
+				//获取点击事件的编号，再进行切换登录页面
+				var index = $(this).attr("data-index");
+				$("#text-box .main:eq("+index+")").addClass("item");
+				/* //判断是否人脸登录
+				if(index=="2"){
+					getMedia($("video")[0])
+				}else{
+					stopStreamedVideo($("video")[0]);
+				} */
+			})
+			$("#tar-box div").hover(function(){
+				//先清除所有的，在设置自己的
+				$("#tar-box div").removeClass("button-color");
+				$(this).addClass("button-color");
+				//获取点击事件的编号，再进行切换登录页面
+				$("#text-box .main").removeClass("item");
+				var index = $(this).attr("data-index");
+				$("#text-box .main:eq("+index+")").addClass("item");
+				//判断是否人脸登录
+				if(index=="2"){
+					getMedia($("video")[0])
+				}else{
+					var video = document.getElementById("video");
+					stopStreamedVideo(video);
+				}
+			})
+			/* $("#phone").on("focus",function(){
+				if($("#phone").val()=="请输入手机号码"){
+					$("#phone").val(" ");
+				}
+			}) */
+
+			/* 
+				点击登录
+				1、检查账号是否填写
+				2、检查密码是否填写
+				3、发送ajax校验 登录中..
+			 */
+			$("#denglu").on("click",function(){
+				if($("#phone").val()==""){
+					alert("请输入账号")
+				}else if($("#pass").val()==""){
+					alert("请输入密码")
+				}else{
+					$("#denglu").val("登录中...")
+				}
+			})
+		</script>
+	</body>
+</html>
